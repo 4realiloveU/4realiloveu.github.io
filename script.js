@@ -1,15 +1,12 @@
-const inputBtn = document.getElementById("downloadBtnInput");
-const urlInput = document.getElementById("videoUrl");
-const resultBox = document.getElementById("result");
-const statusText = document.getElementById("statusText");
-const preview = document.getElementById("preview");
-const downloadVideo = document.getElementById("downloadVideo");
+// Hahahahah
+// script.js versi TikWM API
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+  const url = document.getElementById("videoUrl").value.trim();
+  const resultBox = document.getElementById("result");
+  const statusText = document.getElementById("statusText");
+  const preview = document.getElementById("preview");
 
-let videoLink = "";
-
-inputBtn.addEventListener("click", async () => {
-  const url = urlInput.value.trim();
-  if (!url) return alert("Masukkan URL video TikTok dulu!");
+  if (!url) return alert("Masukkan URL Tiktok terlebih dahulu!");
 
   resultBox.classList.remove("hidden");
   statusText.textContent = "Sedang memproses...";
@@ -19,39 +16,15 @@ inputBtn.addEventListener("click", async () => {
     const res = await fetch(api);
     const data = await res.json();
 
-    if (data && data.data && data.data.play) {
-      videoLink = data.data.play;
+    if (data.data && data.data.play) {
+      const videoLink = data.data.play;
       preview.src = videoLink;
       preview.classList.remove("hidden");
-      statusText.textContent = "Video siap diunduh.";
+      statusText.textContent = "Video berhasil dimuat!";
     } else {
-      statusText.textContent = "Gagal memuat video. Coba link lain.";
+      statusText.textContent = "Gagal memuat video.";
     }
   } catch (err) {
-    statusText.textContent = "Terjadi kesalahan saat mengambil data.";
-    console.error(err);
+    statusText.textContent = "⚠️ Terjadi kesalahan saat mengambil data ⚠️.";
   }
 });
-
-downloadVideo.addEventListener("click", async () => {
-  if (!videoLink) return alert("Tidak ada video untuk diunduh.");
-
-  statusText.textContent = "Menyiapkan unduhan...";
-
-  try {
-    const res = await fetch(videoLink);
-    const blob = await res.blob();
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "tiktok_video.mp4";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(a.href);
-    statusText.textContent = "Unduhan dimulai!";
-  } catch (err) {
-    console.error(err);
-    statusText.textContent = "Gagal mengunduh video.";
-  }
-});
-                                                                     
