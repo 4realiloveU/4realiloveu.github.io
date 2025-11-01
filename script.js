@@ -4,8 +4,6 @@ const resultBox = document.getElementById("result");
 const statusText = document.getElementById("statusText");
 const preview = document.getElementById("preview");
 const downloadVideo = document.getElementById("downloadVideo");
-const hurufKecil = "abcdefghijklmnopqrstuvwxyz";
-const akuCintaPutri = hurufKecil.charAt(Math.floor(Math.random() * hurufKecil.length));
 
 let videoLink = "";
 
@@ -45,12 +43,16 @@ downloadVideo.addEventListener("click", async () => {
     const blob = await res.blob();
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "4realiloveu_" + akuCintaPutri + ".mp4";
+
+    // 🟥 Ganti nama file jadi acak
+    const randomName = "tiktok_" + Math.random().toString(36).substring(2, 8) + ".mp4";
+    a.download = randomName;
+
     document.body.appendChild(a);
     a.click();
     a.remove();
     URL.revokeObjectURL(a.href);
-    statusText.textContent = "Unduhan dimulai!";
+    statusText.textContent = `Unduhan dimulai! Nama file: ${randomName}`;
   } catch (err) {
     console.error(err);
     statusText.textContent = "Gagal mengunduh video.";
