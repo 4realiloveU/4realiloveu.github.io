@@ -45,7 +45,7 @@ downloadVideo.addEventListener("click", async () => {
     const blob = await res.blob();
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = '4realiloveu${randomName}';
+    a.download = `4realiloveu${randomName}`;
     document.body.appendChild(a);
     a.click();
     a.remove();
