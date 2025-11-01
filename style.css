@@ -1,9 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-body {
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: "Poppins", sans-serif;
-  background: linear-gradient(180deg, #1a0000, #4d0a0a, #8b0000, #b33939);
+  background: linear-gradient(180deg, #0a0000, #330000, #5c0a0a, #8b0000);
   color: #fff;
   min-height: 100vh;
   display: flex;
@@ -11,63 +16,80 @@ body {
   align-items: center;
 }
 
-/* 🔴 Navbar */
+/* 🎵 Navbar */
 .navbar {
-  width: 100%;
-  background: rgba(50, 0, 0, 0.9);
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 10px rgba(255, 0, 0, 0.2);
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+  background: linear-gradient(90deg, #1a0000, #4d0000, #8b0000);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 2rem;
+  box-shadow: 0 2px 20px rgba(255, 0, 0, 0.25);
+  z-index: 100;
+  backdrop-filter: blur(10px);
 }
 
 .nav-left {
   font-weight: 600;
+  font-size: 1.1rem;
+  color: #ffcccc;
+  letter-spacing: 0.5px;
 }
 
 .nav-right {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 1.5rem;
+}
+
+.nav-right li {
+  display: inline;
 }
 
 .nav-right a {
-  color: white;
+  color: #ffe6e6;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.2s;
+  transition: color 0.2s ease, text-shadow 0.3s;
 }
 
 .nav-right a:hover {
-  color: #ff6b6b;
+  color: #ff4d4d;
+  text-shadow: 0 0 8px rgba(255, 100, 100, 0.7);
 }
 
+/* 🔴 Container */
 .container {
   text-align: center;
   width: 90%;
   max-width: 500px;
   margin-top: 8rem;
   padding: 2rem;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(30, 0, 0, 0.7);
   border-radius: 20px;
   backdrop-filter: blur(15px);
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.2);
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .title {
   font-size: 1.8rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
+  color: #ffb3b3;
 }
 
 .subtitle {
   font-size: 0.9rem;
-  opacity: 0.8;
+  opacity: 0.85;
   margin-bottom: 1.5rem;
 }
 
@@ -99,9 +121,10 @@ body {
 
 .input-box button:hover {
   transform: scale(1.05);
-  background: linear-gradient(135deg, #990000, #ff4d4d);
+  background: linear-gradient(135deg, #b30000, #ff4d4d);
 }
 
+/* 📹 Hasil */
 .result-box {
   margin-top: 1.5rem;
   text-align: center;
@@ -111,6 +134,7 @@ body {
   width: 100%;
   border-radius: 12px;
   margin-top: 10px;
+  border: 1px solid rgba(255, 0, 0, 0.3);
 }
 
 #saveBtn {
@@ -121,7 +145,7 @@ body {
   border-radius: 10px;
   margin-top: 10px;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s, background 0.3s;
 }
 
 #saveBtn:hover {
