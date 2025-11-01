@@ -4,6 +4,8 @@ const resultBox = document.getElementById("result");
 const statusText = document.getElementById("statusText");
 const preview = document.getElementById("preview");
 const downloadVideo = document.getElementById("downloadVideo");
+const date = new Date().toISOString().split("T")[0];
+const randomName = `tiktok_${Math.random().toString(36).substring(2,8)}_${date}.mp4`;
 
 let videoLink = "";
 
@@ -43,16 +45,12 @@ downloadVideo.addEventListener("click", async () => {
     const blob = await res.blob();
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-
-    // 🟥 Ganti nama file jadi acak
-    const randomName = "tiktok_" + Math.random().toString(36).substring(2, 8) + ".mp4";
     a.download = randomName;
-
     document.body.appendChild(a);
     a.click();
     a.remove();
     URL.revokeObjectURL(a.href);
-    statusText.textContent = `Unduhan dimulai! Nama file: ${randomName}`;
+    statusText.textContent = "Unduhan dimulai!";
   } catch (err) {
     console.error(err);
     statusText.textContent = "Gagal mengunduh video.";
