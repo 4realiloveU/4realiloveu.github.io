@@ -4,6 +4,8 @@ const resultBox = document.getElementById("result");
 const statusText = document.getElementById("statusText");
 const preview = document.getElementById("preview");
 const downloadVideo = document.getElementById("downloadVideo");
+const hurufKecil = "abcdefghijklmnopqrstuvwxyz";
+const akuCintaPutri = hurufKecil.charAt(Math.floor(Math.random() * hurufKecil.length));
 
 let videoLink = "";
 
@@ -43,7 +45,7 @@ downloadVideo.addEventListener("click", async () => {
     const blob = await res.blob();
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "tiktok_video.mp4";
+    a.download = "4realiloveu_" + akuCintaPutri + ".mp4";
     document.body.appendChild(a);
     a.click();
     a.remove();
