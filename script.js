@@ -66,6 +66,6 @@ saveBtn.addEventListener("click", async () => {
     statusText.textContent = "✅ Unduhan dimulai!";
   } catch (err) {
     console.error(err);
-    statusText.textContent = "⚠️ Gagal mengunduh video melalui proxy.";
+    statusText.textContent = "⚠️ Tekan titik tiga di video.";
   }
 });
