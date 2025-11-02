@@ -1,4 +1,4 @@
-// 🎬 TikTok Downloader versi Andika yang 100% bisa download tanpa pindah URL
+// 🎬 TikTok Downloader versi Andika (pakai proxy Replit)
 const inputBtn = document.getElementById("downloadBtn");
 const urlInput = document.getElementById("videoUrl");
 const resultBox = document.getElementById("result");
@@ -37,18 +37,23 @@ inputBtn.addEventListener("click", async () => {
 
 saveBtn.addEventListener("click", async () => {
   if (!videoLink) return alert("Tidak ada video untuk diunduh.");
+
   statusText.textContent = "📥 Menyiapkan unduhan...";
 
-  try {
-    const res = await fetch(videoLink);
-    const blob = await res.blob();
+  // 🔗 Proxy Replit kamu
+  const proxyBase = "https://d2bcc566-26c3-4ba5-bfb7-ae22220d4056-00-2tfg78sku82dq.picard.replit.dev";
+  const proxyUrl = `${proxyBase}/download?url=${encodeURIComponent(videoLink)}`;
 
-    // 🔥 Nama random sesuai request kamu
+  try {
+    const response = await fetch(proxyUrl);
+    const blob = await response.blob();
+
+    // 🔥 Nama file random seperti request kamu
     const date = new Date().toISOString().split("T")[0];
     const random = Math.floor(Math.random() * 9999);
     const filename = `4realiloveu_${date}_${random}.mp4`;
 
-    // 🔽 Buat link download blob
+    // 🔽 Download blob tanpa pindah tab
     const a = document.createElement("a");
     const blobUrl = URL.createObjectURL(blob);
     a.href = blobUrl;
@@ -61,6 +66,6 @@ saveBtn.addEventListener("click", async () => {
     statusText.textContent = "✅ Unduhan dimulai!";
   } catch (err) {
     console.error(err);
-    statusText.textContent = "⚠️ Gagal mengunduh video.";
+    statusText.textContent = "⚠️ Gagal mengunduh video melalui proxy.";
   }
 });
